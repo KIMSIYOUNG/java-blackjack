@@ -6,14 +6,16 @@ import domain.participant.Dealer;
 import domain.participant.Player;
 import domain.participant.PlayersFactory;
 import domain.result.ResultPolicy;
+import domain.rule.RulePolicy;
 import view.InputView;
 
 public class GameController {
-	public void run(ControlPolicy controlPolicy, ResultPolicy resultPolicy) {
+	public void run(ControllerPolicy controllerPolicy, ResultPolicy resultPolicy) {
+
 		List<Player> players = PlayersFactory.of(InputView.inputUserNames());
 		Dealer dealer = new Dealer();
 
-		controlPolicy.gameStart(players, dealer);
+		controllerPolicy.gameStart(players, dealer);
 		// GameResult gameResult = resultPocliy.run(Deaelr , List<Plyr>);
 		// OutputView.printGameResult(gameResult);
 	}

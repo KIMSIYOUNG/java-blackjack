@@ -46,7 +46,7 @@ class PlayerTest {
 		player.receiveCard(new Card(Symbol.SEVEN, Type.CLUB));
 		player.receiveCard(new Card(Symbol.SIX, Type.DIAMOND));
 
-		assertThat(player.canReceiveMore()).isTrue();
+		assertThat(player.canHit()).isTrue();
 	}
 
 	@Test
@@ -57,6 +57,6 @@ class PlayerTest {
 		player.receiveCard(new Card(Symbol.SEVEN, Type.CLUB));
 		player.receiveCard(new Card(Symbol.SIX, Type.DIAMOND));
 
-		assertThat(player.canReceiveMore()).isFalse();
+		assertThat(player.canHit()).isFalse();
 	}
 }

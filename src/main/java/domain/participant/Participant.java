@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 import domain.card.Card;
+import domain.result.Score;
+import domain.rule.RulePolicy;
 
 public abstract class Participant {
 	private final String name;
@@ -39,7 +41,15 @@ public abstract class Participant {
 		cards.add(card);
 	}
 
-	public abstract boolean canReceiveMore();
+	public boolean canHit() {
+		return Score.calculate(cards) <= getHitPoint();
+	}
+
+	public void act(RulePolicy rulePolicy) {
+		rulePolicy.apply(this);
+	}
+
+	public abstract int getHitPoint();
 
 	public List<Card> getCards() {
 		return Collections.unmodifiableList(cards);

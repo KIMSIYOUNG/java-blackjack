@@ -1,7 +1,6 @@
 package domain.participant;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,7 @@ class DealerTest {
 		dealer.receiveCard(new Card(Symbol.SEVEN, Type.CLUB));
 		dealer.receiveCard(new Card(Symbol.FOUR, Type.DIAMOND));
 
-		assertThat(dealer.canReceiveMore()).isTrue();
+		assertThat(dealer.canHit()).isTrue();
 	}
 
 	@Test
@@ -30,6 +29,6 @@ class DealerTest {
 		dealer.receiveCard(new Card(Symbol.EIGHT, Type.CLUB));
 		dealer.receiveCard(new Card(Symbol.FOUR, Type.DIAMOND));
 
-		assertThat(dealer.canReceiveMore()).isFalse();
+		assertThat(dealer.canHit()).isFalse();
 	}
 }
