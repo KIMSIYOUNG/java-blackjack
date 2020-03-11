@@ -8,8 +8,10 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import domain.card.Card;
+import domain.card.Deck;
 import domain.card.Symbol;
 import domain.card.Type;
+import domain.rule.Hit;
 
 class PlayerTest {
 	@Test
@@ -39,24 +41,24 @@ class PlayerTest {
 	}
 
 	@Test
-	@DisplayName("20이하의 경우 추가 카드를 받을 수 있는지")
-	void canReceiveMore() {
-		Player player = new Player("pobi");
-		player.receiveCard(new Card(Symbol.SEVEN, Type.DIAMOND));
-		player.receiveCard(new Card(Symbol.SEVEN, Type.CLUB));
-		player.receiveCard(new Card(Symbol.SIX, Type.DIAMOND));
-
-		assertThat(player.canHit()).isTrue();
-	}
-
-	@Test
-	@DisplayName("20초과의 경우 추가 카드를 받을 수 없는지")
-	void canNotReceiveMore() {
+	@DisplayName("계산결과가 정확한지 테스트")
+	void calculateScoreTest() {
 		Player player = new Player("pobi");
 		player.receiveCard(new Card(Symbol.EIGHT, Type.DIAMOND));
 		player.receiveCard(new Card(Symbol.SEVEN, Type.CLUB));
 		player.receiveCard(new Card(Symbol.SIX, Type.DIAMOND));
 
-		assertThat(player.canHit()).isFalse();
+		assertThat(player.calculateScore()).isEqualTo(21);
+	}
+
+	@Test
+	@DisplayName("한장을 추가적으로 지급하는지")
+	void applyTest() {
+		Dealer dealer = new Dealer();
+		dealer.receiveCard(new Card(Symbol.FIVE, Type.DIAMOND));
+		dealer.receiveCard(new Card(Symbol.FOUR, Type.DIAMOND));
+		dealer.act(new Hit(new Deck()));
+
+		assertThat(dealer.getCards()).hasSize(3);
 	}
 }

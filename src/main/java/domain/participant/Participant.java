@@ -41,15 +41,13 @@ public abstract class Participant {
 		cards.add(card);
 	}
 
-	public boolean canHit() {
-		return Score.calculate(cards) <= getHitPoint();
+	public int calculateScore() {
+		return Score.calculate(cards);
 	}
 
 	public void act(RulePolicy rulePolicy) {
 		rulePolicy.apply(this);
 	}
-
-	public abstract int getHitPoint();
 
 	public List<Card> getCards() {
 		return Collections.unmodifiableList(cards);
