@@ -5,7 +5,7 @@ public class Main {
 		try {
 			new BlackJackController().run();
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
 }
