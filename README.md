@@ -12,6 +12,20 @@
    - List에서 특정 값을 계속 제거하는 경우 LinkedList를 사용하는 것이 낫다.
    - Enum을 활용하여 추가 카드여부를 제한한다.
    - BiFunction과 Enum을 활용해서, 블랙잭 룰을 관리했다.
+  
+   ```java
+         public enum ResultType {
+      WIN("승", "패", (myScore, otherScore) -> {
+         return (!myScore.isBust() && otherScore.isBust()) || myScore.isBiggerThan(otherScore);
+      }),
+      DRAW("무", "무", (myScore, otherScore) -> {
+         return !myScore.isBust() && !otherScore.isBust() && myScore.isEqualTo(otherScore);
+      }),
+      LOSE("패", "승", (myScore, otherScore) -> {
+         return myScore.isBust() || myScore.isLowerThan(otherScore);
+      });
+   ```
+   
    - Player와 Dealer의 공통된 부분을 Gamer로 분리하여 관리한다. (차이가 나는 부분만 상속한다)
    - Enum은 스스로를 초기화하지 않은 상태로 자신을 사용할 수 없다.(A라는 Enum내에서 A를 다시 사용 - java: illegal forward reference, java: self-reference in initializer)
    - Factory Method는 일관된 규칙의 네이밍을 사용하자
@@ -19,9 +33,9 @@
         - create,type,new type : 자기 자신이 아닌 적합한 다른 형태의 객체를 반환하는 형태
    - 예외는 적절한 메세지와 함께 반환하자.
    - 객체는 어플을 이루는 단위지만 각각이 독립적이다. 즉 특정 입력이나 출력에 종속적인 형태로 설계하면 안된다.
-   - 객체가 의존하고 있는 관계가 애매하다면, 변화에 유연한지 고민해봐라 아래의 두 관계는 모두 적절하다 할 수 있지만 변경엔 후자가 조금 더 유연하다.
-        - Score와 Gamer의 관계 
-        - GameResult와 Score의 관계
+   - **객체가 의존하고 있는 관계가 애매하다면, 변화에 유연한지 고민해봐라 아래의 두 관계는 모두 적절하다 할 수 있지만 변경엔 후자가 조금 더 유연하다.**
+        - **Score와 Gamer의 관계**
+        - **GameResult와 Score의 관계**
 
 ### 아직 어려운 개념들 😂
    - 상태패턴을 통해서 이를 구현할 수도 있는데, 이 부분은 아직 어려워서 도입하지 못했다..
